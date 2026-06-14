@@ -1,0 +1,137 @@
+/**
+ * Turkish UI strings.
+ */
+import type { UIStrings } from './en';
+
+const tr: UIStrings = {
+  startLesson: 'Dersi Başlat',
+  endLesson: 'Dersi Bitir',
+  endLessonNow: 'Dersi Hemen Bitir',
+  resumeLesson: 'Yine De Devam Et',
+  retryMessage: 'Yeniden Dene',
+
+  addStudent: 'Öğrenci Ekle',
+  editStudent: 'Öğrenciyi Düzenle',
+  deleteStudent: 'Öğrenciyi Sil',
+  saveStudent: 'Öğrenciyi Kaydet',
+  cancelEdit: 'İptal',
+  confirmDeleteStudent: 'Bu öğrenciyi ve tüm ders geçmişini silmek istediğinizden emin misiniz?',
+
+  studentName: 'Ad',
+  studentAge: 'Yaş',
+  languageLevel: 'Dil Seviyesi',
+  goals: 'Hedefler',
+  strengths: 'Güçlü Yönler',
+  weaknesses: 'Zayıf Yönler',
+  ageGroupLabel: 'Yaş Grubu',
+
+  canReadWriteSource: 'Kaynak dilde okuyup yazabiliyor',
+  canReadWriteTarget: 'Hedef dilde okuyup yazabiliyor',
+  noticeSourceVoiceOnly: 'Açıklamalar kısa ve sözlü olacak (uzun yazılı metin olmadan).',
+  noticeNoReadWrite: 'Okuma anlayışı ve yazma pratiği oturumları bu öğrenci için devre dışı.',
+
+  createStudentFirst: 'Lütfen bir ders başlatmadan önce bir öğrenci ekleyin.',
+  noStudentsYet: 'Henüz öğrenci yok. Bir tane oluşturmak için "Öğrenci Ekle"ye tıklayın.',
+  noLessonsYet: 'Henüz ders kaydedilmedi.',
+
+  tabLesson: 'Ders',
+  tabStudents: 'Öğrenciler',
+  tabHistory: 'Geçmiş',
+  tabData: 'Veri',
+
+  lessonHistory: 'Ders Geçmişi',
+
+  sessionType: 'Oturum Türü',
+  selectStudent: 'Öğrenci seçin',
+  lessonHint: 'Başladıktan sonra öğretmenle doğrudan bu pencerede sohbet edin.',
+
+  voiceConversation: 'Sesli Konuşma',
+  conversationPractice: 'Konuşma Pratiği',
+  grammarLesson: 'Gramer Dersi',
+  readingComprehension: 'Okuma Anlayışı',
+  writingPractice: 'Yazma Pratiği',
+  mixedLesson: 'Karma Ders',
+
+  beginner: 'Başlangıç',
+  elementary: 'Temel',
+  preIntermediate: 'Orta Öncesi',
+  intermediate: 'Orta',
+  upperIntermediate: 'Orta Üstü',
+  advanced: 'İleri',
+
+  exportData: 'Veriyi Dışa Aktar',
+  importData: 'Veri Al',
+  storageUsage: 'Depolama Kullanımı',
+  storageWarning: 'Uyarı: Depolama %80\'den fazla dolu. Eski dersleri dışa aktarıp temizlemeyi düşünün.',
+  importMergeWarning: 'İçe aktarma veriyi BİRLEŞTİRECEK: mevcut öğrenciler güncellenir, yeniler eklenir; ayarlar değiştirilir. Bu geri alınamaz.',
+  importSuccess: 'İçe aktarma başarılı!',
+  importInvalidJson: 'Hata: Dosya geçerli JSON değil.',
+  importInvalidStructure: 'Hata: Dosya yapısı beklenen yedekleme formatıyla eşleşmiyor.',
+
+  editSettings: 'Ayarları Düzenle',
+  saveSettings: 'Ayarları Kaydet',
+  memoryDepth: 'Hafıza Derinliği (hatırlanacak ders sayısı)',
+  ttsEnabled: 'Öğretmen yanıtlarını sesli oku (TTS)',
+  defaultVoiceInputLanguage: 'Varsayılan mikrofon dili',
+  sourceLanguage: 'Diliniz (Kaynak)',
+  targetLanguage: 'Öğrenilen Dil (Hedef)',
+
+  setupTitle: 'Yapay Zeka Dil Öğretmenine Hoş Geldiniz',
+  setupNext: 'İleri',
+  setupBack: 'Geri',
+  setupSaveStart: 'Kaydet ve Başlat',
+  setupStep1: 'Bu cihazdaki öğrencilerin ana dili nedir?',
+  setupStep2: 'Hangi dili öğrenmek istiyorsunuz?',
+  setupStep3: 'Öğretmen kaç geçmiş dersi hatırlamalı?',
+  setupStep4: 'Ses tercihleri',
+  setupStep5: 'Ayarlarınızı gözden geçirin ve kaydedin.',
+
+  micListening: 'Dinleniyor…',
+  micStart: 'Mikrofonu başlat',
+  micStop: 'Mikrofonu durdur',
+  voiceUnavailable: 'Bu tarayıcıda ses girişi mevcut değil.',
+  ttsToggle: 'Metinden konuşmaya geçişini değiştir',
+  voiceLanguageToggle: 'Mikrofon dilini değiştir',
+  sendMessage: 'Gönder',
+
+  pleaseLoginChatGPT: 'Lütfen önce ChatGPT\'ye giriş yapın ve tekrar deneyin.',
+  chatGptNotReady: 'ChatGPT hazır değil. Lütfen bekleyin ve tekrar deneyin.',
+  noResponse: 'ChatGPT\'den yanıt alınamadı (zaman aşımı). Lütfen tekrar deneyin.',
+  startFailed: 'Ders başlatılamadı. ChatGPT bağlantınızı kontrol edip tekrar deneyin.',
+  reportParseFailed: 'Ders raporu oluşturulamadı. Tekrar deneyebilir veya raporsuz oturumu sonlandırabilirsiniz.',
+  storageWriteFailed: 'Veri kaydedilemedi. Depolama alanı dolu olabilir.',
+  sessionInterrupted: 'Konuşma URL\'si değişti — oturum kesintiye uğramış olabilir. Yine de devam edin veya dersi şimdi bitirin.',
+
+  teacher: 'Öğretmen',
+  student: 'Öğrenci',
+  thinking: 'Öğretmen düşünüyor…',
+  connecting: 'Öğretmene bağlanılıyor…',
+  endingLesson: 'Ders bitiriliyor ve rapor oluşturuluyor…',
+  lessonComplete: 'Ders Tamamlandı',
+
+  voiceSessionHint: 'Öğretmeninizle doğrudan konuşun. ChatGPT\'nin sesli modu etkin.',
+  voiceModeActivating: 'Sesli mod etkinleştiriliyor…',
+  voiceModeNotFound: 'Sesli mod otomatik olarak etkinleştirilemedi. Lütfen ChatGPT\'deki mikrofon düğmesine tıklayın.',
+  endingVoiceLesson: 'Ses durduruluyor ve rapor oluşturuluyor…',
+
+  overallScore: 'Genel Puan',
+  grammarScore: 'Gramer',
+  vocabularyScore: 'Kelime Bilgisi',
+  participationScore: 'Katılım',
+  readingScore: 'Okuma',
+  writingScore: 'Yazma',
+
+  homework: 'Ödev',
+  teacherNotes: 'Öğretmen Notları',
+  strengthsObserved: 'Gözlemlenen Güçlü Yönler',
+  weaknessesObserved: 'Gelişim Alanları',
+
+  clearProgress: 'İlerlemeyi Sil',
+  clearProgressConfirm: 'Bu işlem, bu öğrencinin tüm ders geçmişini ve öğrenme ilerlemesini kalıcı olarak siler. Öğrenci profili (ad, diller, seviye) korunur. Bu işlem geri alınamaz.',
+  clearProgressSuccess: 'İlerleme silindi.',
+
+  appTitle: 'Yapay Zeka Dil Öğretmeni',
+  minimize: 'Küçült',
+};
+
+export default tr;

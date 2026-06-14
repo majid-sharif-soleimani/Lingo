@@ -1,0 +1,137 @@
+/**
+ * Japanese UI strings.
+ */
+import type { UIStrings } from './en';
+
+const ja: UIStrings = {
+  startLesson: 'レッスン開始',
+  endLesson: 'レッスン終了',
+  endLessonNow: '今すぐレッスンを終了',
+  resumeLesson: 'とにかく続ける',
+  retryMessage: '再試行',
+
+  addStudent: '生徒を追加',
+  editStudent: '生徒を編集',
+  deleteStudent: '生徒を削除',
+  saveStudent: '生徒を保存',
+  cancelEdit: 'キャンセル',
+  confirmDeleteStudent: 'この生徒とすべてのレッスン履歴を削除してもよろしいですか？',
+
+  studentName: '名前',
+  studentAge: '年齢',
+  languageLevel: '語学レベル',
+  goals: '目標',
+  strengths: '得意なこと',
+  weaknesses: '苦手なこと',
+  ageGroupLabel: '年齢グループ',
+
+  canReadWriteSource: '母国語で読み書きできる',
+  canReadWriteTarget: '目標言語で読み書きできる',
+  noticeSourceVoiceOnly: '説明は短く口語的にします（長い書き言葉は使いません）。',
+  noticeNoReadWrite: 'この生徒のリーディングとライティングのセッションは無効です。',
+
+  createStudentFirst: 'レッスンを開始する前に生徒を追加してください。',
+  noStudentsYet: 'まだ生徒がいません。「生徒を追加」をクリックして作成してください。',
+  noLessonsYet: 'まだレッスンが記録されていません。',
+
+  tabLesson: 'レッスン',
+  tabStudents: '生徒',
+  tabHistory: '履歴',
+  tabData: 'データ',
+
+  lessonHistory: 'レッスン履歴',
+
+  sessionType: 'セッションタイプ',
+  selectStudent: '生徒を選択',
+  lessonHint: '開始後、このウィンドウで直接先生とチャットしてください。',
+
+  voiceConversation: '音声会話',
+  conversationPractice: '会話練習',
+  grammarLesson: '文法レッスン',
+  readingComprehension: '読解',
+  writingPractice: 'ライティング練習',
+  mixedLesson: 'ミックスレッスン',
+
+  beginner: '初心者',
+  elementary: '初級',
+  preIntermediate: '準中級',
+  intermediate: '中級',
+  upperIntermediate: '上中級',
+  advanced: '上級',
+
+  exportData: 'データをエクスポート',
+  importData: 'データをインポート',
+  storageUsage: 'ストレージ使用状況',
+  storageWarning: '警告：ストレージが80%以上使用されています。古いレッスンのエクスポートと削除を検討してください。',
+  importMergeWarning: 'インポートはデータをマージします：既存の生徒は更新され、新しい生徒は追加され、設定は置き換えられます。これは元に戻せません。',
+  importSuccess: 'インポートに成功しました！',
+  importInvalidJson: 'エラー：ファイルが有効なJSONではありません。',
+  importInvalidStructure: 'エラー：ファイル構造が期待するバックアップ形式と一致しません。',
+
+  editSettings: '設定を編集',
+  saveSettings: '設定を保存',
+  memoryDepth: 'メモリの深さ（記憶するレッスン数）',
+  ttsEnabled: '先生の返信を読み上げる（TTS）',
+  defaultVoiceInputLanguage: 'デフォルトのマイク言語',
+  sourceLanguage: 'あなたの言語（ソース）',
+  targetLanguage: '学習する言語（ターゲット）',
+
+  setupTitle: 'AI語学教師へようこそ',
+  setupNext: '次へ',
+  setupBack: '戻る',
+  setupSaveStart: '保存して開始',
+  setupStep1: 'このデバイスの生徒の母国語は何ですか？',
+  setupStep2: '学びたい言語は何ですか？',
+  setupStep3: '先生は何回分の過去のレッスンを覚えるべきですか？',
+  setupStep4: '音声設定',
+  setupStep5: '設定を確認して保存してください。',
+
+  micListening: '聞いています…',
+  micStart: 'マイクを開始',
+  micStop: 'マイクを停止',
+  voiceUnavailable: 'このブラウザでは音声入力が利用できません。',
+  ttsToggle: 'テキスト読み上げを切り替え',
+  voiceLanguageToggle: 'マイク言語を切り替え',
+  sendMessage: '送信',
+
+  pleaseLoginChatGPT: 'まずChatGPTにログインしてから再試行してください。',
+  chatGptNotReady: 'ChatGPTの準備ができていません。しばらく待ってから再試行してください。',
+  noResponse: 'ChatGPTからの応答がありません（タイムアウト）。再試行してください。',
+  startFailed: 'レッスンの開始に失敗しました。ChatGPTの接続を確認して再試行してください。',
+  reportParseFailed: 'レッスンレポートを生成できませんでした。再試行するか、レポートなしでセッションを終了できます。',
+  storageWriteFailed: 'データの保存に失敗しました。ストレージが満杯の可能性があります。',
+  sessionInterrupted: '会話のURLが変わりました — セッションが中断された可能性があります。続けるか今すぐレッスンを終了してください。',
+
+  teacher: '先生',
+  student: '生徒',
+  thinking: '先生が考えています…',
+  connecting: '先生に接続中…',
+  endingLesson: 'レッスンを終了してレポートを生成しています…',
+  lessonComplete: 'レッスン完了',
+
+  voiceSessionHint: '先生と直接話してください。ChatGPTの音声モードが有効です。',
+  voiceModeActivating: '音声モードを有効化しています…',
+  voiceModeNotFound: '音声モードを自動的に有効化できませんでした。ChatGPTのマイクボタンをクリックしてください。',
+  endingVoiceLesson: '音声を停止してレポートを生成しています…',
+
+  overallScore: '総合スコア',
+  grammarScore: '文法',
+  vocabularyScore: '語彙',
+  participationScore: '参加度',
+  readingScore: '読解',
+  writingScore: 'ライティング',
+
+  homework: '宿題',
+  teacherNotes: '先生のメモ',
+  strengthsObserved: '観察された強み',
+  weaknessesObserved: '改善が必要な分野',
+
+  clearProgress: '進捗をクリア',
+  clearProgressConfirm: 'この操作により、この学生のすべてのレッスン履歴と学習進捗が完全に削除されます。学生プロフィール（名前、言語、レベル）は保持されます。この操作は元に戻せません。',
+  clearProgressSuccess: '進捗をクリアしました。',
+
+  appTitle: 'AI語学教師',
+  minimize: '最小化',
+};
+
+export default ja;

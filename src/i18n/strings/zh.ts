@@ -1,0 +1,137 @@
+/**
+ * Chinese (Simplified) UI strings.
+ */
+import type { UIStrings } from './en';
+
+const zh: UIStrings = {
+  startLesson: '开始课程',
+  endLesson: '结束课程',
+  endLessonNow: '立即结束课程',
+  resumeLesson: '继续课程',
+  retryMessage: '重试',
+
+  addStudent: '添加学生',
+  editStudent: '编辑学生',
+  deleteStudent: '删除学生',
+  saveStudent: '保存学生',
+  cancelEdit: '取消',
+  confirmDeleteStudent: '确定要删除该学生及其所有课程记录吗？',
+
+  studentName: '姓名',
+  studentAge: '年龄',
+  languageLevel: '语言级别',
+  goals: '学习目标',
+  strengths: '优势',
+  weaknesses: '不足',
+  ageGroupLabel: '年龄组',
+
+  canReadWriteSource: '能够用母语读写',
+  canReadWriteTarget: '能够用目标语言读写',
+  noticeSourceVoiceOnly: '解释将简短并以口语方式表达（不包含长篇书面内容）。',
+  noticeNoReadWrite: '该学生的阅读理解和写作练习课程已禁用。',
+
+  createStudentFirst: '请先添加学生再开始课程。',
+  noStudentsYet: '暂无学生。点击"添加学生"以创建一个。',
+  noLessonsYet: '暂无课程记录。',
+
+  tabLesson: '课程',
+  tabStudents: '学生',
+  tabHistory: '历史',
+  tabData: '数据',
+
+  lessonHistory: '课程历史',
+
+  sessionType: '课程类型',
+  selectStudent: '选择学生',
+  lessonHint: '开始后，直接在此窗口与老师交流。',
+
+  voiceConversation: '语音对话',
+  conversationPractice: '会话练习',
+  grammarLesson: '语法课',
+  readingComprehension: '阅读理解',
+  writingPractice: '写作练习',
+  mixedLesson: '综合课程',
+
+  beginner: '初级',
+  elementary: '基础',
+  preIntermediate: '中初级',
+  intermediate: '中级',
+  upperIntermediate: '中高级',
+  advanced: '高级',
+
+  exportData: '导出数据',
+  importData: '导入数据',
+  storageUsage: '存储使用情况',
+  storageWarning: '警告：存储使用超过80%。请考虑导出并清理旧课程。',
+  importMergeWarning: '导入将合并数据：现有学生将被更新，新学生将被添加，设置将被替换。此操作无法撤销。',
+  importSuccess: '导入成功！',
+  importInvalidJson: '错误：文件不是有效的JSON。',
+  importInvalidStructure: '错误：文件结构与预期的备份格式不匹配。',
+
+  editSettings: '编辑设置',
+  saveSettings: '保存设置',
+  memoryDepth: '记忆深度（记住的课程数量）',
+  ttsEnabled: '大声朗读老师回复（TTS）',
+  defaultVoiceInputLanguage: '默认麦克风语言',
+  sourceLanguage: '您的语言（源语言）',
+  targetLanguage: '学习的语言（目标语言）',
+
+  setupTitle: '欢迎使用AI语言教师',
+  setupNext: '下一步',
+  setupBack: '上一步',
+  setupSaveStart: '保存并开始',
+  setupStep1: '此设备上学生的母语是什么？',
+  setupStep2: '您想学习哪种语言？',
+  setupStep3: '老师应记住多少节过去的课程？',
+  setupStep4: '语音偏好',
+  setupStep5: '查看设置并保存。',
+
+  micListening: '聆听中…',
+  micStart: '开启麦克风',
+  micStop: '停止麦克风',
+  voiceUnavailable: '此浏览器不支持语音输入。',
+  ttsToggle: '切换文字转语音',
+  voiceLanguageToggle: '切换麦克风语言',
+  sendMessage: '发送',
+
+  pleaseLoginChatGPT: '请先登录ChatGPT，然后重试。',
+  chatGptNotReady: 'ChatGPT尚未准备好。请等待后重试。',
+  noResponse: 'ChatGPT没有响应（超时）。请重试。',
+  startFailed: '课程启动失败。请检查您的ChatGPT连接并重试。',
+  reportParseFailed: '无法生成课程报告。您可以重试或不保存报告结束本次课程。',
+  storageWriteFailed: '数据保存失败。存储空间可能已满。',
+  sessionInterrupted: '对话URL已更改 — 课程可能已中断。继续或立即结束课程。',
+
+  teacher: '老师',
+  student: '学生',
+  thinking: '老师正在思考…',
+  connecting: '正在连接教师…',
+  endingLesson: '正在结束课程并生成报告…',
+  lessonComplete: '课程完成',
+
+  voiceSessionHint: '直接与您的老师交谈。ChatGPT语音模式已激活。',
+  voiceModeActivating: '正在激活语音模式…',
+  voiceModeNotFound: '无法自动激活语音模式。请点击ChatGPT中的麦克风按钮。',
+  endingVoiceLesson: '正在停止语音并生成报告…',
+
+  overallScore: '总分',
+  grammarScore: '语法',
+  vocabularyScore: '词汇',
+  participationScore: '参与度',
+  readingScore: '阅读',
+  writingScore: '写作',
+
+  homework: '家庭作业',
+  teacherNotes: '教师备注',
+  strengthsObserved: '观察到的优势',
+  weaknessesObserved: '需要改进的方面',
+
+  clearProgress: '清除进度',
+  clearProgressConfirm: '此操作将永久删除该学生的所有课程历史和学习进度。学生档案（姓名、语言、级别）将被保留。此操作无法撤销。',
+  clearProgressSuccess: '进度已清除。',
+
+  appTitle: 'AI语言教师',
+  minimize: '最小化',
+};
+
+export default zh;

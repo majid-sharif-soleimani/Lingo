@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.claude/
+*.local.json
+chrome-extension-prompt.md
+VOICE_CONVERSATION_PLAN.md
