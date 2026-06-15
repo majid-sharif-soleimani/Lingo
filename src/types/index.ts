@@ -120,6 +120,9 @@ export interface ActiveSession {
 
   /** Voice Conversation sessions only: true if ChatGPT's voice mode was successfully activated. */
   voiceModeActivated?: boolean;
+
+  /** Set when the lesson was started from a learning plan day. */
+  planDayNumber?: number;
 }
 
 /** A single message shown in our chat UI. */
@@ -144,4 +147,39 @@ export interface ImportResult {
   studentsUpdated: number;
   settingsImported: boolean;
   errors: string[];
+}
+
+// ─── Learning Plan types ──────────────────────────────────────────────────────
+
+export type PracticeFrequency = 'daily' | 'weekdays' | 'alternate' | 'weekly';
+export type PlanDayType = 'Grammar' | 'Vocabulary' | 'Reading' | 'Writing' | 'Speaking' | 'Review';
+export type DayStatus = 'pending' | 'completed' | 'skipped';
+export type MaterialType = 'vocabulary' | 'grammar' | 'reading' | 'writing' | 'review';
+
+export interface LearningPlanConfig {
+  targetLevel: LanguageLevel;
+  durationDays: number;
+  frequency: PracticeFrequency;
+  sessionMinutes: number;
+  startDate: string;        // YYYY-MM-DD
+}
+
+export interface DayPlan {
+  d: number;           // day number, 1-based
+  t: PlanDayType;
+  topic: string;
+  sub: string[];       // 2-4 sub-topics / objectives
+  min: number;         // estimated minutes
+  status: DayStatus;
+  score?: number;
+  doneAt?: string;
+}
+
+export interface LearningPlan {
+  id: string;
+  studentId: string;
+  generatedAt: string;
+  config: LearningPlanConfig;
+  configHash: string;
+  days: DayPlan[];
 }

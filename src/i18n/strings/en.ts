@@ -153,6 +153,50 @@ export interface UIStrings {
   // General UI
   appTitle: string;
   minimize: string;
+
+  // Plan tab
+  tabPlan: string;
+  generatePlan: string;
+  planTargetLevel: string;
+  planDuration: string;
+  planDurationDays: string;
+  planFrequency: string;
+  planSessionLength: string;
+  planSessionMinutes: string;
+  planStartDate: string;
+  planGenerating: string;
+  planStale: string;
+  planRegenerate: string;
+  planRegenerateConfirm: string;
+  planKeepCurrent: string;
+  planProgress: string;
+  planDay: string;
+  planStartThisLesson: string;
+  planNoActivePlan: string;
+  planParseFailed: string;
+  planFollowPlan: string;
+  planChooseManually: string;
+  planNextDay: string;
+  // Frequency labels
+  freqDaily: string;
+  freqWeekdays: string;
+  freqAlternate: string;
+  freqWeekly: string;
+  // Practice material generator
+  practiceTitle: string;
+  practiceType: string;
+  practiceTopic: string;
+  practiceTopicPlaceholder: string;
+  practiceLevel: string;
+  practiceGenerate: string;
+  practiceGenerating: string;
+  practiceDownloadPdf: string;
+  practiceBack: string;
+  practiceTypeVocabulary: string;
+  practiceTypeGrammar: string;
+  practiceTypeReading: string;
+  practiceTypeWriting: string;
+  practiceTypeReview: string;
 }
 
 const en: UIStrings = {
@@ -304,6 +348,50 @@ const en: UIStrings = {
   // General UI
   appTitle: 'AI Language Teacher',
   minimize: 'Minimize',
+
+  // Plan tab
+  tabPlan: 'Plan',
+  generatePlan: 'Generate Learning Plan',
+  planTargetLevel: 'Target Level',
+  planDuration: 'Duration',
+  planDurationDays: 'days',
+  planFrequency: 'Practice Frequency',
+  planSessionLength: 'Session Length',
+  planSessionMinutes: 'min / session',
+  planStartDate: 'Start Date',
+  planGenerating: 'ChatGPT is building your plan…',
+  planStale: 'Your student profile has changed. Regenerate the plan to keep it accurate.',
+  planRegenerate: 'Regenerate Plan',
+  planRegenerateConfirm: 'Regenerating will permanently reset all plan progress. Continue?',
+  planKeepCurrent: 'Keep Current Plan',
+  planProgress: 'Progress',
+  planDay: 'Day',
+  planStartThisLesson: 'Start This Lesson',
+  planNoActivePlan: 'No learning plan yet.',
+  planParseFailed: 'Could not parse the learning plan. Please try again.',
+  planFollowPlan: 'Follow my learning plan',
+  planChooseManually: 'Choose session type manually',
+  planNextDay: 'Next lesson',
+  // Frequency labels
+  freqDaily: 'Every day',
+  freqWeekdays: 'Weekdays (Mon–Fri)',
+  freqAlternate: 'Every other day',
+  freqWeekly: 'Once a week',
+  // Practice material generator
+  practiceTitle: 'Practice Materials',
+  practiceType: 'Material Type',
+  practiceTopic: 'Topic',
+  practiceTopicPlaceholder: 'e.g. Present Perfect, travel vocabulary…',
+  practiceLevel: 'Level',
+  practiceGenerate: 'Generate',
+  practiceGenerating: 'Generating…',
+  practiceDownloadPdf: 'Download PDF',
+  practiceBack: '← Back',
+  practiceTypeVocabulary: 'Vocabulary Quiz',
+  practiceTypeGrammar: 'Grammar Exercises',
+  practiceTypeReading: 'Reading Passage',
+  practiceTypeWriting: 'Writing Prompt',
+  practiceTypeReview: 'Review Sheet',
 };
 
 export default en;

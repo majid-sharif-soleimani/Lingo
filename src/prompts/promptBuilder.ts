@@ -4,7 +4,7 @@
  * Language settings are read directly from the StudentProfile.
  */
 
-import type { StudentProfile, SessionType, LessonSummary } from '../types/index';
+import type { StudentProfile, SessionType, LessonSummary, DayPlan } from '../types/index';
 
 /** Returns age-appropriate teacher instructions. */
 function ageBlock(age: number): string {
@@ -85,11 +85,13 @@ needs most based on their history.`;
  * @param student      The student profile (contains sourceLanguage, targetLanguage, etc.)
  * @param sessionType  The type of lesson being conducted
  * @param recentLessons  Already-fetched previous lesson summaries (length = student.memoryDepth)
+ * @param planDay      Optional plan day — when provided, replaces Block 7 with specific objectives
  */
 export function buildTeacherSystemPrompt(
   student: StudentProfile,
   sessionType: SessionType,
-  recentLessons: LessonSummary[]
+  recentLessons: LessonSummary[],
+  planDay?: DayPlan
 ): string {
   const { sourceLanguage, targetLanguage } = student;
   const blocks: string[] = [];
@@ -156,8 +158,16 @@ Vocabulary topics already covered: ${student.vocabularyTopicsLearned.join(', ') 
     blocks.push(`Previous lessons (most recent first):\n${historyLines.join('\n')}`);
   }
 
-  // Block 7 — Session Type
-  blocks.push(sessionBlock(sessionType, sourceLanguage, targetLanguage));
+  // Block 7 — Session Type (or Plan Day objectives when plan-driven)
+  if (planDay) {
+    blocks.push(`TODAY'S LESSON PLAN: Day ${planDay.d} — ${planDay.t}: ${planDay.topic}
+Learning objectives:
+${planDay.sub.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+Estimated session: ${planDay.min} minutes.
+Focus ENTIRELY on these objectives. Do not introduce other topics unless they are directly relevant.`);
+  } else {
+    blocks.push(sessionBlock(sessionType, sourceLanguage, targetLanguage));
+  }
 
   // Block 8 — Strict Boundaries (CRITICAL — always included verbatim)
   blocks.push(`STRICT RULES — YOU MUST FOLLOW THESE AT ALL TIMES:

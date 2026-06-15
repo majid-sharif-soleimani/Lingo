@@ -47,7 +47,7 @@ const TRANSCRIPT_KEY = 'transcript';
  * If step 6 fails, the session is removed so the UI reverts to the Control Panel
  * and shows t('startFailed').
  */
-export async function startLesson(studentId: string, sessionType: SessionType): Promise<void> {
+export async function startLesson(studentId: string, sessionType: SessionType, planDayNumber?: number): Promise<void> {
   console.log('[lessonController] startLesson — studentId:', studentId, 'sessionType:', sessionType);
 
   const student = await studentRepo.getById(studentId);
@@ -75,6 +75,7 @@ export async function startLesson(studentId: string, sessionType: SessionType): 
     sessionType,
     startedAt: new Date().toISOString(),
     conversationUrl,
+    ...(planDayNumber !== undefined ? { planDayNumber } : {}),
   };
   await writeSession(SESSION_KEY, session);
   await writeSession(TRANSCRIPT_KEY, []);
@@ -145,6 +146,11 @@ export async function endLesson(): Promise<LessonSummary> {
 
   const summary = toLessonSummary(report, session.sessionType);
   await studentRepo.appendLesson(session.studentId, summary, settings.maxLessonsPerStudent);
+
+  if (session.planDayNumber !== undefined) {
+    const { markDayComplete } = await import('./planController');
+    await markDayComplete(session.studentId, session.planDayNumber, summary.overallScore);
+  }
 
   // Clear session state
   await removeSession(SESSION_KEY);

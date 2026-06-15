@@ -5,9 +5,10 @@
  * cannot read/write in the target language.
  */
 import React, { useState, useEffect } from 'react';
-import type { StudentProfile, SessionType } from '../../types/index';
+import type { StudentProfile, SessionType, LearningPlan, DayPlan } from '../../types/index';
 import { t } from '../../i18n/index';
 import * as studentRepo from '../../storage/studentRepository';
+import { loadPlan } from '../../session/planController';
 import { readSession, writeSession } from '../../storage/storageHelper';
 import { isChatGPTReady } from '../../content/domIntegration';
 import {
@@ -41,9 +42,19 @@ function sessionTypeLabel(type: SessionType): string {
   return map[type]?.() ?? type;
 }
 
+/** Maps a PlanDayType to the SessionType used in lessonController. */
+function planDayTypeToSessionType(planDayType: DayPlan['t']): SessionType {
+  switch (planDayType) {
+    case 'Reading': return 'Reading Comprehension';
+    case 'Writing': return 'Writing Practice';
+    case 'Speaking': return 'Voice Conversation';
+    default: return 'Grammar Lesson'; // Grammar, Vocabulary, Review
+  }
+}
+
 interface LessonTabProps {
   dir: 'ltr' | 'rtl';
-  onStart: (studentId: string, sessionType: SessionType) => void;
+  onStart: (studentId: string, sessionType: SessionType, planDayNumber?: number) => void;
   onGoToStudents: () => void;
 }
 
@@ -58,12 +69,23 @@ export function LessonTab({ dir, onStart, onGoToStudents }: LessonTabProps): Rea
   const [starting, setStarting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [chatReady, setChatReady] = useState(true);
+  // Plan integration
+  const [plan, setPlan] = useState<LearningPlan | null>(null);
+  const [followPlan, setFollowPlan] = useState(true);
 
   useEffect(() => {
     studentRepo.getAll().then(setStudents).catch(console.error);
     setChatReady(isChatGPTReady());
     // Restore last selections from storage.
-    readSession<string>('lastStudentId', '').then(id => { if (id) setSelectedStudentId(id); }).catch(console.error);
+    readSession<string>('lastStudentId', '').then(id => {
+      if (id) {
+        setSelectedStudentId(id);
+        loadPlan(id).then(p => {
+          setPlan(p);
+          setFollowPlan(!!p && p.days.some(d => d.status === 'pending'));
+        }).catch(console.error);
+      }
+    }).catch(console.error);
     readSession<SessionType | null>('lastSessionType', null).then(st => { if (st) setSessionType(st); }).catch(console.error);
   }, []);
 
@@ -77,11 +99,18 @@ export function LessonTab({ dir, onStart, onGoToStudents }: LessonTabProps): Rea
     return true;
   });
 
+  const nextPendingDay = plan?.days.find(d => d.status === 'pending') ?? null;
+
   function handleStart() {
     if (!selectedStudentId || starting) return;
     setError(null);
     setStarting(true);
-    onStart(selectedStudentId, sessionType);
+    if (followPlan && nextPendingDay) {
+      const mappedType = planDayTypeToSessionType(nextPendingDay.t);
+      onStart(selectedStudentId, mappedType, nextPendingDay.d);
+    } else {
+      onStart(selectedStudentId, sessionType);
+    }
     // starting flag will reset when the lesson overlay takes over or on error (handled by Panel)
   }
 
@@ -118,8 +147,16 @@ export function LessonTab({ dir, onStart, onGoToStudents }: LessonTabProps): Rea
             const id = e.target.value;
             setSelectedStudentId(id);
             setSessionType('Voice Conversation');
+            setPlan(null);
+            setFollowPlan(false);
             void writeSession('lastStudentId', id);
             void writeSession('lastSessionType', 'Voice Conversation');
+            if (id) {
+              loadPlan(id).then(p => {
+                setPlan(p);
+                setFollowPlan(!!p && p.days.some(d => d.status === 'pending'));
+              }).catch(console.error);
+            }
           }}
           dir={dir}
         >
@@ -142,6 +179,37 @@ export function LessonTab({ dir, onStart, onGoToStudents }: LessonTabProps): Rea
         )}
       </div>
 
+      {/* Plan toggle — only shown if student has a plan with pending days */}
+      {plan && nextPendingDay && (
+        <div style={{ ...formGroup, gap: 8 }}>
+          <label style={labelStyle}>{t('planFollowPlan')}</label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13 }}>
+            <input
+              type="radio"
+              checked={followPlan}
+              onChange={() => setFollowPlan(true)}
+              style={{ accentColor: palette.primary }}
+            />
+            <span>{t('planFollowPlan')}</span>
+          </label>
+          {followPlan && nextPendingDay && (
+            <div style={{ fontSize: 12, color: palette.primary, paddingInlineStart: 24, fontWeight: 600 }}>
+              {t('planNextDay')}: {t('planDay')} {nextPendingDay.d} · {nextPendingDay.t}: {nextPendingDay.topic}
+            </div>
+          )}
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13 }}>
+            <input
+              type="radio"
+              checked={!followPlan}
+              onChange={() => setFollowPlan(false)}
+              style={{ accentColor: palette.primary }}
+            />
+            <span>{t('planChooseManually')}</span>
+          </label>
+        </div>
+      )}
+
+      {(!plan || !nextPendingDay || !followPlan) && (
       <div style={formGroup}>
         <label style={labelStyle}>{t('sessionType')}</label>
         <select
@@ -162,6 +230,7 @@ export function LessonTab({ dir, onStart, onGoToStudents }: LessonTabProps): Rea
           ))}
         </select>
       </div>
+      )}
 
       {error && <div style={{ ...notice('error'), marginBottom: 12 }}>{error}</div>}
 

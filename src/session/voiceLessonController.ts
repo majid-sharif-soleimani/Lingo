@@ -50,7 +50,7 @@ const TRANSCRIPT_KEY = 'transcript';
  *   3. Writes session to storage (UI switches to VoiceView).
  *   4. Activates ChatGPT's voice mode.
  */
-export async function startVoiceLesson(studentId: string): Promise<void> {
+export async function startVoiceLesson(studentId: string, planDayNumber?: number): Promise<void> {
   console.log('[voiceLessonController] startVoiceLesson — studentId:', studentId);
 
   const student = await studentRepo.getById(studentId);
@@ -79,6 +79,7 @@ export async function startVoiceLesson(studentId: string): Promise<void> {
     startedAt: new Date().toISOString(),
     conversationUrl,
     voiceModeActivated: false,
+    ...(planDayNumber !== undefined ? { planDayNumber } : {}),
   };
   await writeSession(SESSION_KEY, session);
   await writeSession(TRANSCRIPT_KEY, []);
@@ -138,6 +139,11 @@ export async function endVoiceLesson(): Promise<LessonSummary> {
 
   const summary = toLessonSummary(report, session.sessionType);
   await studentRepo.appendLesson(session.studentId, summary, settings.maxLessonsPerStudent);
+
+  if (session.planDayNumber !== undefined) {
+    const { markDayComplete } = await import('./planController');
+    await markDayComplete(session.studentId, session.planDayNumber, summary.overallScore);
+  }
 
   await removeSession(SESSION_KEY);
   await removeSession(TRANSCRIPT_KEY);

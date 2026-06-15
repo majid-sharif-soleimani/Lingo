@@ -7,6 +7,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { StudentProfile, LessonSummary } from '../types/index';
 import { read, write } from './storageHelper';
+import { deletePlan } from './learningPlanRepository';
 
 const STORAGE_KEY = 'students';
 
@@ -151,6 +152,8 @@ export async function clearProgress(studentId: string): Promise<void> {
   student.updatedAt = new Date().toISOString();
   map[studentId] = student;
   await writeAll(map);
+  // Also clear the learning plan so it doesn't show stale progress
+  await deletePlan(studentId);
 }
 
 /** Returns an array with duplicate strings removed (preserving first occurrence). */

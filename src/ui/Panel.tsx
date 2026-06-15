@@ -28,6 +28,7 @@ import { LessonTab } from './tabs/LessonTab';
 import { StudentsTab } from './tabs/StudentsTab';
 import { HistoryTab } from './tabs/HistoryTab';
 import { DataTab } from './tabs/DataTab';
+import { PlanTab } from './tabs/PlanTab';
 import * as lessonController from '../session/lessonController';
 import * as voiceLessonController from '../session/voiceLessonController';
 import { launcherBtn, card, cardHeader, cardTitle, cardBody, palette, notice } from './styles';
@@ -36,7 +37,7 @@ interface PanelProps {
   host: HTMLDivElement;
 }
 
-type PanelTab = 'lesson' | 'students' | 'history' | 'data';
+type PanelTab = 'lesson' | 'students' | 'plan' | 'history' | 'data';
 
 /**
  * Root panel component. Manages all top-level state and navigation.
@@ -155,7 +156,7 @@ export function Panel({ host }: PanelProps): React.ReactElement {
 
   // ── Lesson start ──────────────────────────────────────────────────────────
 
-  async function handleLessonStart(studentId: string, sessionType: SessionType) {
+  async function handleLessonStart(studentId: string, sessionType: SessionType, planDayNumber?: number) {
     setStartError(null);
     setStarting(true);
     console.log('[Panel] handleLessonStart — studentId:', studentId, 'sessionType:', sessionType);
@@ -167,9 +168,9 @@ export function Panel({ host }: PanelProps): React.ReactElement {
         applyLanguageInMemory(st.sourceLanguage);
       }
       if (sessionType === 'Voice Conversation') {
-        await voiceLessonController.startVoiceLesson(studentId);
+        await voiceLessonController.startVoiceLesson(studentId, planDayNumber);
       } else {
-        await lessonController.startLesson(studentId, sessionType);
+        await lessonController.startLesson(studentId, sessionType, planDayNumber);
       }
       console.log('[Panel] lesson started successfully');
     } catch (err) {
@@ -326,6 +327,7 @@ export function Panel({ host }: PanelProps): React.ReactElement {
   const tabs: TabDef[] = [
     { id: 'lesson', label: t('tabLesson') },
     { id: 'students', label: t('tabStudents') },
+    { id: 'plan', label: t('tabPlan') },
     { id: 'history', label: t('tabHistory') },
     { id: 'data', label: t('tabData') },
   ];
@@ -368,12 +370,15 @@ export function Panel({ host }: PanelProps): React.ReactElement {
         {activeTab === 'lesson' && (
           <LessonTab
             dir={dir}
-            onStart={(studentId, sessionType) => void handleLessonStart(studentId, sessionType)}
+            onStart={(studentId, sessionType, planDayNumber) => void handleLessonStart(studentId, sessionType, planDayNumber)}
             onGoToStudents={() => setActiveTab('students')}
           />
         )}
         {activeTab === 'students' && (
           <StudentsTab dir={dir} />
+        )}
+        {activeTab === 'plan' && (
+          <PlanTab dir={dir} />
         )}
         {activeTab === 'history' && (
           <HistoryTab dir={dir} />
